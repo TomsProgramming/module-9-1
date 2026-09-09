@@ -1,16 +1,6 @@
-<x-layout>
+<x-layout title="Register">
     <section class="min-h-screen px-6 py-8 flex flex-col">
-        <nav class="md:flex md:justify-between md:items-center">
-            <a href="/">
-                <img src="/assets/images/logo.svg" alt="Laracasts Logo" width="165" height="16">
-            </a>
-
-            <div class="mt-8 md:mt-0">
-                <a href="/" class="text-xs font-bold uppercase hover:text-blue-500">Home Page</a>
-                <a href="{{ route('login') }}" class="ml-3 text-xs font-bold uppercase hover:text-blue-500">Log in</a>
-                <span class="ml-3 text-xs font-bold uppercase text-blue-500">Sign up</span>
-            </div>
-        </nav>
+        <x-nav />
 
         <main class="flex-1 flex items-center justify-center py-16">
             <div class="w-full max-w-md">
@@ -21,19 +11,26 @@
                 </div>
 
                 <div class="bg-gray-100 border border-black border-opacity-5 rounded-xl p-8 mt-10">
-                    <form method="POST" action="#" class="space-y-6">
+                    <form method="POST" action="{{ route('register.store') }}" class="space-y-6">
+                        @csrf
                         <div>
                             <label for="name" class="block text-xs font-bold uppercase mb-2">Name</label>
                             <input id="name" name="name" type="text" autocomplete="name" required
                                 class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500"
-                                placeholder="Your name">
+                                placeholder="Your name" value="{{ old('name') }}">
+                            @error('name')
+                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div>
                             <label for="email" class="block text-xs font-bold uppercase mb-2">Email address</label>
                             <input id="email" name="email" type="email" autocomplete="email" required
                                 class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500"
-                                placeholder="you@example.com">
+                                placeholder="you@example.com" value="{{ old('email') }}">
+                            @error('email')
+                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div>
@@ -41,6 +38,9 @@
                             <input id="password" name="password" type="password" autocomplete="new-password" required
                                 class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500"
                                 placeholder="Choose a password">
+                            @error('password')
+                                <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div>
