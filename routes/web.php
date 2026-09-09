@@ -1,11 +1,16 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PostController::class, 'index'])->name('home');
 Route::get('/post/{post:slug}', [PostController::class, 'show'])->name('post.show');
+
+Route::post('/post/{post:slug}/comments', [CommentController::class, 'store'])
+    ->middleware('auth')
+    ->name('comments.store');
 
 Route::middleware('guest')->group(function () {
     Route::view('/login', 'auth.login')->name('login');

@@ -62,13 +62,16 @@
                     <div class="bg-gray-100 border border-black border-opacity-5 rounded-xl p-8 mb-8">
                         <h4 class="font-bold text-sm uppercase mb-4">Leave a comment</h4>
 
-                        <form method="POST" action="#" class="space-y-4">
+                        <form method="POST" action="{{ route('comments.store', $post) }}" class="space-y-4">
                             @csrf
                             <div>
-                                <label for="comment" class="sr-only">Comment</label>
-                                <textarea id="comment" name="comment" rows="4" required
+                                <label for="body" class="sr-only">Comment</label>
+                                <textarea id="body" name="body" rows="4" required
                                     placeholder="Share your thoughts..."
-                                    class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500"></textarea>
+                                    class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500">{{ old('body') }}</textarea>
+                                @error('body')
+                                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <button type="submit"
@@ -85,21 +88,23 @@
                 @endauth
 
                 <div class="space-y-4">
-                    @foreach ([1, 2] as $comment)
+                    @forelse ($post->comments as $comment)
                         <div class="bg-gray-100 border border-black border-opacity-5 rounded-xl p-6">
                             <div class="flex items-center text-sm">
                                 <img src="/assets/images/lary-avatar.svg" alt="Commenter avatar">
                                 <div class="ml-3">
-                                    <h5 class="font-bold">Jane Doe</h5>
-                                    <span class="text-gray-400 text-xs">2 days ago</span>
+                                    <h5 class="font-bold">{{ $comment->user->name }}</h5>
+                                    <span class="text-gray-400 text-xs">{{ $comment->created_at->diffForHumans() }}</span>
                                 </div>
                             </div>
 
                             <p class="text-sm mt-4 leading-loose">
-                                This was a great read, thanks for sharing! Looking forward to more posts like this.
+                                {{ $comment->body }}
                             </p>
                         </div>
-                    @endforeach
+                    @empty
+                        <p class="text-sm text-gray-400">No comments yet. Be the first to share your thoughts!</p>
+                    @endforelse
                 </div>
             </section>
         </main>
