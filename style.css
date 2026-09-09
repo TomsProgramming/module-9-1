@@ -1,0 +1,509 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #fff;
+    color: #0f0f0f;
+    font-family: Arial, sans-serif;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    border: 0;
+    cursor: pointer;
+}
+
+.site-header {
+    border-bottom: 1px solid #e5e7eb;
+    background: #fff;
+}
+
+.header-content,
+.mobile-menu {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.header-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 56px;
+    padding: 0 8px;
+}
+
+.icon-button {
+    padding: 8px;
+    border-radius: 999px;
+    color: #374151;
+    background: transparent;
+}
+
+.icon-button:hover,
+.mobile-menu a:hover {
+    background: #f3f4f6;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+}
+
+.icon-menu {
+    width: 24px;
+    height: 24px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: inherit;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    text-decoration: none;
+}
+
+.brand-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 28px;
+    border-radius: 8px;
+    color: #fff;
+    background: #dc2626;
+}
+
+.youtube-logo {
+    display: block;
+    width: 16px;
+    height: 16px;
+}
+
+.brand-name {
+    font-size: 18px;
+}
+
+.brand-country {
+    color: #6b7280;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.search-form {
+    position: absolute;
+    left: 50%;
+    display: flex;
+    width: min(560px, calc(100% - 220px));
+    transform: translateX(-50%);
+}
+
+.search-input {
+    width: 100%;
+    height: 36px;
+    padding: 0 20px;
+    border: 1px solid #d1d5db;
+    border-radius: 999px 0 0 999px;
+    outline: 0;
+    font-size: 14px;
+}
+
+.search-input:focus {
+    border-color: #3b82f6;
+}
+
+.search-button {
+    padding: 0 20px;
+    border: 1px solid #d1d5db;
+    border-left: 0;
+    border-radius: 0 999px 999px 0;
+    color: #4b5563;
+    background: #f9fafb;
+}
+
+.search-button:hover {
+    background: #f3f4f6;
+}
+
+.mobile-search-button,
+.mobile-menu {
+    display: none;
+}
+
+.video-page {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px 12px 48px;
+}
+
+.video-player {
+    display: block;
+    width: 100%;
+    border-radius: 12px;
+    background: #000;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
+}
+
+.video-title {
+    margin: 16px 0 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.video-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 8px 0 16px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.channel-info,
+.video-actions,
+.comments-header,
+.comment,
+.comment-heading,
+.comment-actions {
+    display: flex;
+    align-items: center;
+}
+
+.channel-info {
+    gap: 12px;
+}
+
+.channel-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    background: #f97316;
+    font-size: 20px;
+}
+
+.channel-info h2,
+.channel-info p,
+.comments-header h2,
+.comment-heading h3,
+.comment p {
+    margin: 0;
+}
+
+.channel-info h2 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.channel-info p,
+.comment-heading span {
+    color: #6b7280;
+    font-size: 12px;
+}
+
+.subscribe-button {
+    margin-left: 8px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    color: #fff;
+    background: #000;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.subscribe-button:hover {
+    background: #1f2937;
+}
+
+.video-actions {
+    gap: 8px;
+}
+
+.video-actions button {
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: #f3f4f6;
+    font-size: 14px;
+}
+
+.video-actions button:hover {
+    background: #e5e7eb;
+}
+
+.video-actions button:last-child {
+    padding: 8px 12px;
+    font-weight: 700;
+}
+
+.description {
+    margin-top: 16px;
+    padding: 16px;
+    border-radius: 12px;
+    background: #f2f2f2;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.description p {
+    margin: 0;
+}
+
+.description-heading {
+    font-weight: 600;
+}
+
+.description-heading span {
+    color: #6b7280;
+    font-weight: 400;
+}
+
+.description-text {
+    margin-top: 4px !important;
+    color: #374151;
+}
+
+.more-button {
+    margin-top: 4px;
+    padding: 0;
+    color: #374151;
+    background: transparent;
+    font-weight: 600;
+}
+
+.more-button:hover,
+.comment-actions button:hover {
+    color: #000;
+}
+
+.comments {
+    margin-top: 40px;
+}
+
+.comments-header {
+    gap: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.comments-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.sort-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #374151;
+    background: transparent;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.sort-button span {
+    font-size: 18px;
+}
+
+.comment-form {
+    display: flex;
+    gap: 12px;
+    padding: 20px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.comment-form-avatar,
+.comment-avatar {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    font-weight: 700;
+}
+
+.comment-form-avatar {
+    color: #fff;
+    background: #db2777;
+}
+
+.comment-form-content {
+    flex: 1;
+}
+
+.comment-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.comment-fields input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    outline: 0;
+    font-size: 14px;
+}
+
+.comment-fields input:focus,
+.comment-input:focus {
+    border-color: #000;
+}
+
+.comment-input {
+    width: 100%;
+    margin-top: 12px;
+    padding: 8px 4px;
+    border: 0;
+    border-bottom: 1px solid #d1d5db;
+    outline: 0;
+    font-size: 14px;
+}
+
+.comment-submit {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
+}
+
+.comment-submit button {
+    padding: 8px 20px;
+    border-radius: 999px;
+    color: #fff;
+    background: #2563eb;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.comment-submit button:hover {
+    background: #1d4ed8;
+}
+
+.comment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-top: 24px;
+}
+
+.comment {
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.comment-avatar {
+    color: #4b5563;
+    background: #e5e7eb;
+    font-size: 14px;
+}
+
+.comment-content {
+    min-width: 0;
+}
+
+.comment-heading {
+    align-items: baseline;
+    gap: 8px;
+}
+
+.comment-heading h3 {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.comment p {
+    margin-top: 4px;
+    color: #374151;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.comment-actions {
+    gap: 20px;
+    margin-top: 8px;
+    color: #6b7280;
+    font-size: 12px;
+}
+
+.comment-actions button {
+    padding: 0;
+    color: inherit;
+    background: transparent;
+}
+
+.comment-actions button:last-child {
+    font-weight: 600;
+}
+
+@media (min-width: 640px) {
+    .header-content {
+        gap: 16px;
+        padding: 0 16px;
+    }
+
+    .video-page {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    .video-title {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    .search-form {
+        display: none;
+    }
+
+    .mobile-search-button {
+        display: block;
+        margin-left: auto;
+    }
+
+    .mobile-menu {
+        display: none;
+        padding: 8px 20px 16px;
+        border-top: 1px solid #f3f4f6;
+    }
+
+    .mobile-menu.is-open {
+        display: block;
+    }
+
+    .mobile-menu nav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .mobile-menu a {
+        padding: 8px 12px;
+        border-radius: 8px;
+        color: inherit;
+        text-decoration: none;
+    }
+}
+
+@media (max-width: 639px) {
+    .comment-fields {
+        grid-template-columns: 1fr;
+    }
+}
