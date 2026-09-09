@@ -41,7 +41,7 @@
                         <div class="space-x-2">
                             <a href="#"
                                 class="px-3 py-1 border border-blue-300 rounded-full text-blue-300 text-xs uppercase font-semibold"
-                                style="font-size: 10px">{{ $post->category }}</a>
+                                style="font-size: 10px">{{ $post->categories->pluck('name')->join(', ') }}</a>
                         </div>
                     </div>
 
@@ -49,8 +49,14 @@
                         {{ $post->title }}
                     </h1>
 
-                    <div class="space-y-4 lg:text-lg leading-loose">
-                        <p>{!! nl2br(e($post->body)) !!}</p>
+                    <div class="space-y-6 lg:text-lg leading-loose">
+                        @if (strip_tags($post->body) === $post->body)
+                            @foreach (preg_split('/\R\s*\R/u', trim($post->body)) as $paragraph)
+                                <p>{!! nl2br(e($paragraph)) !!}</p>
+                            @endforeach
+                        @else
+                            {!! $post->body !!}
+                        @endif
                     </div>
                 </div>
             </article>
