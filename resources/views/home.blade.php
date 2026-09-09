@@ -15,14 +15,17 @@
                 I'm going to keep you guys up to speed with what's going on!
             </p>
 
-            <div class="space-y-2 lg:space-y-0 lg:space-x-4 mt-8">
+            <form method="GET" action="{{ route('home') }}" class="space-y-2 lg:space-y-0 lg:space-x-4 mt-8">
                 <!--  Category -->
                 <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl">
-                    <select class="flex-1 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm font-semibold">
-                        <option value="category" disabled selected>Category
-                        </option>
-                        <option value="personal">Personal</option>
-                        <option value="business">Business</option>
+                    <select name="category" onchange="this.form.submit()"
+                        class="flex-1 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm font-semibold">
+                        <option value="">All categories</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->slug }}" @selected($selectedCategory === $category->slug)>
+                                {{ $category->name }}
+                            </option>
+                        @endforeach
                     </select>
 
                     <svg class="transform -rotate-90 absolute pointer-events-none" style="right: 12px;" width="22"
@@ -38,13 +41,11 @@
 
                 <!-- Other Filters -->
                 <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl">
-                    <select class="flex-1 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm font-semibold">
-                        <option value="category" disabled selected>Other Filters
-                        </option>
-                        <option value="foo">Foo
-                        </option>
-                        <option value="bar">Bar
-                        </option>
+                    <select name="sort" onchange="this.form.submit()"
+                        class="flex-1 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm font-semibold">
+                        <option value="latest" @selected($selectedSort === 'latest')>Newest</option>
+                        <option value="oldest" @selected($selectedSort === 'oldest')>Oldest</option>
+                        <option value="title" @selected($selectedSort === 'title')>Title A-Z</option>
                     </select>
 
                     <svg class="transform -rotate-90 absolute pointer-events-none" style="right: 12px;" width="22"
@@ -60,12 +61,11 @@
 
                 <!-- Search -->
                 <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl px-3 py-2">
-                    <form method="GET" action="#">
-                        <input type="text" name="search" placeholder="Find something"
-                            class="bg-transparent placeholder-black font-semibold text-sm">
-                    </form>
+                    <input type="search" name="search" value="{{ $search }}" placeholder="Find something"
+                        class="bg-transparent placeholder-black font-semibold text-sm">
+                    <button type="submit" class="ml-2 text-sm font-semibold">Search</button>
                 </div>
-            </div>
+            </form>
         </header>
 
         <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">

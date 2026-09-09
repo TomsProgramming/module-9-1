@@ -165,7 +165,29 @@ class PostController extends Controller
 
     public function index(Request $request): View|JsonResponse
     {
-        $posts = Post::approved()->with(['user', 'categories'])->latest('published_at')->paginate(6);
+        $sort = $request->input('sort', 'latest');
+        $sorts = [
+            'latest' => ['published_at', 'desc'],
+            'oldest' => ['published_at', 'asc'],
+            'title' => ['title', 'asc'],
+        ];
+        $sort = array_key_exists($sort, $sorts) ? $sort : 'latest';
+        $search = trim((string) $request->input('search', ''));
+
+        $postsQuery = Post::approved()
+            ->with(['user', 'categories'])
+            ->when($request->filled('category'), function ($query) use ($request): void {
+                $query->whereHas('categories', fn ($categoryQuery) => $categoryQuery->where('slug', $request->input('category')));
+            })
+            ->when($search !== '', function ($query) use ($search): void {
+                $query->where(function ($searchQuery) use ($search): void {
+                    $searchQuery->where('title', 'like', "%{$search}%")
+                        ->orWhere('excerpt', 'like', "%{$search}%");
+                });
+            })
+            ->orderBy(...$sorts[$sort]);
+
+        $posts = $postsQuery->paginate(6)->withQueryString();
 
         if ($request->ajax()) {
             return response()->json([
@@ -176,6 +198,10 @@ class PostController extends Controller
 
         return view('home', [
             'posts' => $posts,
+            'categories' => Category::query()->orderBy('name')->get(),
+            'selectedCategory' => $request->input('category', ''),
+            'selectedSort' => $sort,
+            'search' => $search,
         ]);
     }
 
