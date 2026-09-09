@@ -54,6 +54,54 @@
                     </div>
                 </div>
             </article>
+
+            <section class="max-w-2xl mx-auto">
+                <h3 class="font-bold text-2xl mb-6">Comments</h3>
+
+                @auth
+                    <div class="bg-gray-100 border border-black border-opacity-5 rounded-xl p-8 mb-8">
+                        <h4 class="font-bold text-sm uppercase mb-4">Leave a comment</h4>
+
+                        <form method="POST" action="#" class="space-y-4">
+                            @csrf
+                            <div>
+                                <label for="comment" class="sr-only">Comment</label>
+                                <textarea id="comment" name="comment" rows="4" required
+                                    placeholder="Share your thoughts..."
+                                    class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-blue-500"></textarea>
+                            </div>
+
+                            <button type="submit"
+                                class="transition-colors duration-300 bg-blue-500 hover:bg-blue-600 rounded-full text-xs font-semibold text-white uppercase py-3 px-8">
+                                Post comment
+                            </button>
+                        </form>
+                    </div>
+                @else
+                    <p class="text-sm text-gray-500 mb-8">
+                        <a href="{{ route('login') }}" class="font-semibold text-blue-500 hover:text-blue-600">Log in</a>
+                        to leave a comment.
+                    </p>
+                @endauth
+
+                <div class="space-y-4">
+                    @foreach ([1, 2] as $comment)
+                        <div class="bg-gray-100 border border-black border-opacity-5 rounded-xl p-6">
+                            <div class="flex items-center text-sm">
+                                <img src="/assets/images/lary-avatar.svg" alt="Commenter avatar">
+                                <div class="ml-3">
+                                    <h5 class="font-bold">Jane Doe</h5>
+                                    <span class="text-gray-400 text-xs">2 days ago</span>
+                                </div>
+                            </div>
+
+                            <p class="text-sm mt-4 leading-loose">
+                                This was a great read, thanks for sharing! Looking forward to more posts like this.
+                            </p>
+                        </div>
+                    @endforeach
+                </div>
+            </section>
         </main>
 
         <footer class="bg-gray-100 border border-black border-opacity-5 rounded-xl text-center py-16 px-10 mt-16">
